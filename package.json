@@ -1,0 +1,17 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "Chap App using Node.js and Socket.IO",
+  "main": "./server/server.js",
+  "scripts": {
+    "dev": "nodemon ./server/server.js -e html,css,js",
+    "start": "node ./server/server.js"
+  },
+  "author": "Vatsal Dhar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {}
+}

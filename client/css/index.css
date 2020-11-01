@@ -1,0 +1,61 @@
+:root {
+    --blue: #1e1746;
+    --blue-dark: #14102b;
+}
+
+body {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--blue-dark);
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 1rem;
+    background-color: white;
+    padding: 2rem;
+    margin: 0.5rem;
+    width: 100%;
+    max-width: 35rem;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    font-size: 4rem;
+    font-weight: 300;
+}
+
+.form {
+    display: grid;
+    row-gap: 3rem;
+}
+
+.form button {
+    width: 100%;
+    font-size: 2rem;
+    padding: 1rem 0;
+    border: none;
+    background-color: var(--blue);
+    color: white;
+    border-radius: 1000px;
+    transition: background-color 0.2s;
+    margin: 1rem 0;
+}
+
+.form button:hover,
+.form button:active {
+    background-color: var(--blue-dark);
+}
+
+.form input {
+    width: 100%;
+    border: none;
+    font-size: 1.5rem;
+    padding: 1rem;
+    background-color: #eee;
+}
