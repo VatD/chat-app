@@ -7,11 +7,12 @@ const path = require("path");
 const { sendMessage } = require("./utils/events");
 const { onJoin, onSendMessage, onDisconnect } = require("./utils/handlers");
 
-app.use(express.static(path.join(__dirname, "../client")));
+const dir = process.env.NODE_ENV === "production" ? "public" : "client";
+app.use(express.static(path.join(__dirname, `../${dir}`)));
 
-app.get("/", (req, res) => {
-    res.send("index.html");
-});
+app.get("/", (req, res) => res.send());
+
+app.get("*", (req, res) => res.redirect("/"));
 
 io.on("connection", (socket) => {
     socket.on("join", onJoin);

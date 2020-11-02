@@ -2,8 +2,8 @@ const { generateMessage } = require("./messages");
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users.js");
 const { message, roomData } = require("./events.js");
 
-const onJoin = (details, callback) => {
-    const { error, ...user } = addUser({ id: socket.id, ...details });
+const onJoin = (data, callback) => {
+    const { error, ...user } = addUser({ id: socket.id, ...data });
 
     if (error) return callback(error);
 
