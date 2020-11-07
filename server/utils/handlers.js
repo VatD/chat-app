@@ -1,50 +1,53 @@
 const { generateMessage } = require("./messages");
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users.js");
-const { message, roomData } = require("./events.js");
 
-const onJoin = (data, callback) => {
+const onJoin = (io, socket, data, callback) => {
     const { error, ...user } = addUser({ id: socket.id, ...data });
 
-    if (error) return callback(error);
+    if (error) return callback({ error });
+
+    callback({ user });
 
     socket.join(user.room);
-    socket.emit(message, generateMessage("Chat App", "Welcome!"));
+    socket.emit("MESSAGE", generateMessage("Chat App", "Welcome!"));
     socket.broadcast
         .to(user.room)
         .emit(
-            message,
-            generateMessage("Chat App", `${user.username} has joined!`)
+            "MESSAGE",
+            generateMessage(
+                "Chat App",
+                `${user.username.toUpperCase()} has joined!`
+            )
         );
-    io.to(user.room).emit(roomData, {
-        room: user.room,
-        users: getUsersInRoom(user.room),
-    });
+    io.to(user.room).emit("ROOM_DATA", getUsersInRoom(user.room));
+};
 
+const onSendMessage = (io, socket, message, callback) => {
+    const user = getUser(socket.id);
+    if (!user) return;
+    io.to(user.room).emit("MESSAGE", generateMessage(user.username, message));
     callback();
 };
 
-const onSendMessage = (message, callback) => {
-    const user = getUser(socket.id);
-    io.to(user.room).emit(message, generateMessage(user.username, message));
-    callback("delivered");
-};
-
-const onDisconnect = () => {
+const onDisconnect = (io, socket) => {
     const user = removeUser(socket.id);
 
     if (user) {
         io.to(user.room).emit(
-            message,
-            generateMessage("Chat App", `${user.username} has left.`)
+            "MESSAGE",
+            generateMessage(
+                "Chat App",
+                `${user.username.toUpperCase()} has left.`
+            )
         );
-        io.to(user.room).emit(roomData, {
+        io.to(user.room).emit("ROOM_DATA", {
             room: user.room,
             users: getUsersInRoom(user.room),
         });
     }
 };
 
-exports.default = {
+module.exports = {
     onJoin,
     onSendMessage,
     onDisconnect,
