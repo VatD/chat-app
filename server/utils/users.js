@@ -1,8 +1,6 @@
 const users = new Map();
 
 const addUser = ({ id, username, room }) => {
-    if (!username || !room) return { error: "username and room required" };
-
     username = username.trim().toLowerCase();
     room = room.trim().toLowerCase();
 

@@ -6,8 +6,32 @@
         <title>Room | Chat App</title>
         <link rel="stylesheet" href="./css/global.css" />
         <link rel="stylesheet" href="./css/chat.css" />
+        <link rel="icon" href="./images/chat.png" />
     </head>
     <body>
+        <main class="main">
+            <section class="sidebar">
+                <div class="room">ROOM</div>
+                <div class="persons"></div>
+            </section>
+            <section class="chat-area">
+                <div class="chats-container">
+                    <div class="chats"></div>
+                </div>
+                <form class="compose-message">
+                    <input
+                        type="text"
+                        name="message"
+                        id="message"
+                        placeholder="Your Message"
+                        autocomplete="off"
+                        required
+                    />
+                    <button>&rarr;</button>
+                </form>
+            </section>
+        </main>
+        <script src="/socket.io/socket.io.js"></script>
         <script src="./js/chat.js"></script>
     </body>
 </html>
