@@ -5,6 +5,8 @@ const socket = io();
 let me;
 
 // DOM Elements
+const $sidebar = document.querySelector(".sidebar");
+const $toggleBtn = document.querySelector(".toggler");
 const $roomName = document.querySelector(".room");
 const $persons = document.querySelector(".persons");
 const $messageForm = document.querySelector(".compose-message");
@@ -44,6 +46,12 @@ const getPersistedUser = () => {
         document.title = `${user.room.toUpperCase()} | Chat App`;
     });
 })();
+
+// Toggle sidebar -- responsiveness
+$toggleBtn.addEventListener("click", () => {
+    $toggleBtn.classList.toggle("toggler-clicked");
+    $sidebar.classList.toggle("sidebar-show");
+});
 
 // Create HTML for messages
 const createMessageDiv = ({ username, text, createdAt }) => {

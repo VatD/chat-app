@@ -12,6 +12,36 @@ body {
     grid-template-columns: repeat(4, 1fr);
 }
 
+.toggler {
+    z-index: 500;
+
+    display: none;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+
+    width: 5rem;
+    height: 5rem;
+
+    font-size: 3rem;
+
+    color: var(--white);
+    background: var(--blue);
+
+    outline: none;
+    border: none;
+    border-radius: 50%;
+
+    transform: rotate(0deg);
+    transition: transform 500ms;
+}
+
+.toggler:focus,
+.toggler:hover {
+    background: var(--blue-dark);
+    box-shadow: 0 0 1rem var(--blue-dark);
+}
+
 .sidebar {
     min-height: 0;
     grid-row: 1/2;
@@ -22,11 +52,6 @@ body {
 
     display: grid;
     grid-template-rows: min-content 1fr;
-
-    /* width: 50vw;
-    height: 100vh;
-    z-index: 300;
-    position: absolute; */
 }
 
 .room {
@@ -181,4 +206,36 @@ body {
 .chat p {
     letter-spacing: 0.1ch;
     margin-top: 0.5rem;
+}
+
+@media only screen and (max-width: 37.5em) {
+    .chat-area {
+        grid-column: 1/-1;
+    }
+
+    .toggler {
+        display: block;
+    }
+
+    .sidebar {
+        z-index: 300;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 50%;
+        height: calc(100% - 2rem);
+
+        transform: translateX(-250%);
+        transition: transform 500ms;
+    }
+}
+
+.sidebar-show {
+    transform: translateX(0);
+}
+
+.toggler-clicked {
+    transform: rotate(-180deg);
 }
