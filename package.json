@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon ./server/server.js -e html,css,js",
     "start-local": "node ./server/server.js",
-    "start": "pm2-runtime start ecosystem.config.js --env production"
+    "start": "gulp build && pm2-runtime start ecosystem.config.js --env production"
   },
   "author": "Vatsal Dhar",
   "license": "ISC",
