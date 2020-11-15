@@ -17,6 +17,8 @@
                     name="username"
                     placeholder="Display Name"
                     autocomplete="off"
+                    minlength="5"
+                    maxlength="15"
                     required
                 />
                 <input
@@ -24,10 +26,13 @@
                     name="room"
                     placeholder="Room"
                     autocomplete="off"
+                    minlength="4"
+                    maxlength="15"
                     required
                 />
                 <button>Join</button>
             </form>
+            <p class="info">* inputs are case insensitive</p>
         </div>
         <script src="./js/index.js"></script>
     </body>
