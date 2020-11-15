@@ -32,19 +32,16 @@ const onSendMessage = (io, socket, message, callback) => {
 const onDisconnect = (io, socket) => {
     const user = removeUser(socket.id);
 
-    if (user) {
-        io.to(user.room).emit(
-            "MESSAGE",
-            generateMessage(
-                "Chat App",
-                `${user.username.toUpperCase()} has left.`
-            )
-        );
-        io.to(user.room).emit("ROOM_DATA", {
-            room: user.room,
-            users: getUsersInRoom(user.room),
-        });
-    }
+    if (!user) return;
+
+    io.to(user.room).emit(
+        "MESSAGE",
+        generateMessage("Chat App", `${user.username.toUpperCase()} has left.`)
+    );
+    io.to(user.room).emit("ROOM_DATA", {
+        room: user.room,
+        users: getUsersInRoom(user.room),
+    });
 };
 
 module.exports = {

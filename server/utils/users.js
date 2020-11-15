@@ -1,8 +1,10 @@
 const users = new Map();
 
 const addUser = ({ id, username, room }) => {
-    username = username.trim().toLowerCase();
-    room = room.trim().toLowerCase();
+    if (!user || !room) return { error: "username or string not provided" };
+
+    username = username.trim().toLowerCase().substring(0, 15);
+    room = room.trim().toLowerCase().substring(0, 15);
 
     for (let val of users.values()) {
         if (val.username === username && val.room === room)
