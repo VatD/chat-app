@@ -1,7 +1,7 @@
 const users = new Map();
 
 const addUser = ({ id, username, room }) => {
-    if (!user || !room) return { error: "username or string not provided" };
+    if (!username || !room) return { error: "username or string not provided" };
 
     username = username.trim().toLowerCase().substring(0, 15);
     room = room.trim().toLowerCase().substring(0, 15);
