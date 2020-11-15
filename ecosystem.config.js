@@ -3,8 +3,6 @@ module.exports = {
         {
             name: "chat app",
             script: "./server/server.js",
-            instances: "max",
-            exec_mode: "cluster",
             env: {
                 NODE_ENV: "development",
             },
