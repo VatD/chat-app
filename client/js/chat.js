@@ -3,6 +3,7 @@ const socket = io();
 
 // User Data
 let me;
+let isSidebarOpen = false;
 
 // DOM Elements
 const $sidebar = document.querySelector(".sidebar");
@@ -11,6 +12,7 @@ const $roomName = document.querySelector(".room");
 const $persons = document.querySelector(".persons");
 const $messageForm = document.querySelector(".compose-message");
 const $chats = document.querySelector(".chats");
+const $input = document.querySelector("#message");
 const $button = document.querySelector(".compose-message button");
 
 // Redirect to home page
@@ -47,10 +49,21 @@ const getPersistedUser = () => {
     });
 })();
 
-// Toggle sidebar -- responsiveness
-$toggleBtn.addEventListener("click", () => {
+// Toggling state of sidebar
+const toggleSideBar = () => {
+    isSidebarOpen = !isSidebarOpen;
     $toggleBtn.classList.toggle("toggler-clicked");
     $sidebar.classList.toggle("sidebar-show");
+};
+
+// Toggle sidebar
+$toggleBtn.addEventListener("click", () => {
+    toggleSideBar();
+});
+
+// Close sidebar on input focus
+$input.addEventListener("focus", () => {
+    if (isSidebarOpen) toggleSideBar();
 });
 
 // Create HTML for messages
